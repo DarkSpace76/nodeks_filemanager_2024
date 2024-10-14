@@ -7,6 +7,8 @@ import { rm } from "./module/fs/rm.js";
 import { cp } from "./module/fs/cp.js";
 import { calculateHash } from "./module/fs/hash.js";
 import { mainOs } from "./module/os/main_os.js";
+import { compress } from "./module/zip/compress.js";
+import { decompress } from "./module/zip/decompress.js";
 import { userName } from "./index.js";
 
 import path from 'node:path'
@@ -85,6 +87,18 @@ const parseCommand = async (command) => {
             });
             break;
 
+        case 'compress':
+
+            await compress(workingDir, params[1]).then(value => {
+                printMesssage(value);
+            });
+
+            break;
+        case 'decompress':
+            await decompress(workingDir, params[1], params[2]).then(value => {
+                printMesssage(value);
+            });
+            break;
         case '.exit': exitProcess(); break;
 
         default:
