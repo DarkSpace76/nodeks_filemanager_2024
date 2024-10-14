@@ -6,6 +6,7 @@ import { rn } from "./module/fs/rn.js";
 import { rm } from "./module/fs/rm.js";
 import { cp } from "./module/fs/cp.js";
 import { calculateHash } from "./module/fs/hash.js";
+import { mainOs } from "./module/os/main_os.js";
 import { userName } from "./index.js";
 
 import path from 'node:path'
@@ -78,6 +79,11 @@ const parseCommand = async (command) => {
             });
             break;
 
+        case 'os':
+            await mainOs(params[1]).then(value => {
+                printMesssage(value);
+            });
+            break;
 
         case '.exit': exitProcess(); break;
 
