@@ -20,7 +20,7 @@ const parseCommand = async (command) => {
     if (!command) return;
 
     const params = comandDestruct(command);;
-
+    console.log(params);
     switch (params[0]) {
 
         case 'up': await upDir(workingDir); break;
@@ -120,7 +120,8 @@ const upDir = async () => {
 }
 
 function comandDestruct(value) {
-    const tmpCmdList = value.toString().split(new RegExp('(".*?")')).filter(Boolean);
+    const tmpCmdList = value.toString().replace(/[\x00-\x1F\x7F]/g, '').split(new RegExp('(".*?")')).filter(Boolean);
+    console.log();
     let resCmdList = [];
     tmpCmdList.forEach(e => {
         if (e.includes('"')) {
